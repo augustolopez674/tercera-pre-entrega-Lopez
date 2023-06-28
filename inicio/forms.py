@@ -6,3 +6,8 @@ class CrearClienteFormulario(forms.Form):
     edad = forms.IntegerField()
     email = forms.EmailField()
     fecha_nacimiento = forms.DateField(required=False)
+
+class CrearProductoFormulario(forms.Form):
+    categoria = forms.CharField(max_length=20)
+    nombre = forms.CharField(max_length=20)
+    precio = forms.IntegerField()

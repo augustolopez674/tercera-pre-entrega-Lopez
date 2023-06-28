@@ -8,3 +8,9 @@ class Cliente(models.Model):
     edad = models.IntegerField()
     email = models.EmailField()
     fecha_nacimiento = models.DateField(null=True)
+    
+    
+class Producto(models.Model):
+    categoria = models.CharField(max_length=20)
+    nombre = models.CharField(max_length=20)
+    precio = models.IntegerField()    
