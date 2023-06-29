@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Productos</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Listado de Productos
+{% endblock h1_header %}
+
+{% block contenido %}
+<button><a href={% url 'inicio:crear_producto' %}>Crear Producto</a></button>
+
+<form action="" method="get">
+    {{formulario}}
+    <button>Buscar</button>
+</form>
+{% if productos %}
+{% for producto in productos %}
+<li>Nombre: {{producto.nombre}}</li>
+{% endfor %}
+{% else %}
+<p>El producto solicitado no existe.</p>
+{% endif %}
+{% endblock contenido %}

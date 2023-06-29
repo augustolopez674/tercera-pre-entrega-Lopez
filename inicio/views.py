@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from inicio.forms import CrearClienteFormulario, CrearProductoFormulario
+from django.shortcuts import render, redirect
+from inicio.forms import CrearClienteFormulario, CrearProductoFormulario, BuscarProductoFormulario
 from inicio.models import Cliente, Producto
 # Create your views here.
 
@@ -32,8 +32,21 @@ def crear_producto(request):
             producto = Producto(categoria=info['categoria'],nombre=info['nombre'],precio=info['precio'])
             producto.save()
             mensaje = f'Se creó el producto {producto.nombre}, de la categoria {producto.categoria} y precio {producto.precio}'
+            return redirect('inicio:listar_productos')
         else:
             return render(request, 'inicio/crear_producto.html', {'formulario': formulario})     
     
     formulario = CrearProductoFormulario()
     return render(request, 'inicio/crear_producto.html', {'formulario': formulario, 'mensaje': mensaje})
+
+
+
+def listar_productos(request):
+    
+    formulario = BuscarProductoFormulario(request.GET)
+    if formulario.is_valid():
+        nombre_producto = formulario.cleaned_data['nombre']
+        listado_de_productos = Producto.objects.filter(nombre__icontains=nombre_producto)
+        
+    formulario = BuscarProductoFormulario()    
+    return render(request, 'inicio/listar_productos.html', {'formulario': formulario, 'productos': listado_de_productos})

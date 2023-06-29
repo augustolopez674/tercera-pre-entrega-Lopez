@@ -11,3 +11,7 @@ class CrearProductoFormulario(forms.Form):
     categoria = forms.CharField(max_length=20)
     nombre = forms.CharField(max_length=20)
     precio = forms.IntegerField()
+    
+class BuscarProductoFormulario(forms.Form):
+    nombre = forms.CharField(max_length=20, required=False)
+    
