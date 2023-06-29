@@ -11,13 +11,16 @@ Listado de Productos
 {% block contenido %}
 <button><a href={% url 'inicio:crear_producto' %}>Crear Producto</a></button>
 
+<br>
+<br>
+
 <form action="" method="get">
     {{formulario}}
     <button>Buscar</button>
 </form>
 {% if productos %}
 {% for producto in productos %}
-<li>Nombre: {{producto.nombre}}</li>
+<li>Nombre: {{producto.nombre}} - Precio: {{producto.precio}}</li>
 {% endfor %}
 {% else %}
 <p>El producto solicitado no existe.</p>
