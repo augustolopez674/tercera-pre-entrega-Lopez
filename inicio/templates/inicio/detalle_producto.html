@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Producto</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Datos del Producto {{producto.nombre}}
+{% endblock h1_header %}
+
+{% block contenido %}
+<li>Categoria: {{producto.categoria}}</li>
+<li>Precio: {{producto.precio}}</li>
+{% endblock contenido %}

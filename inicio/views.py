@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from inicio.forms import CrearClienteFormulario, CrearProductoFormulario, BuscarProductoFormulario
 from inicio.models import Cliente, Producto
+from django.views.generic.edit import UpdateView, DeleteView
+from django.views.generic.detail import DetailView
+from django.urls import reverse_lazy
 # Create your views here.
 
 def inicio(request):
@@ -50,3 +53,20 @@ def listar_productos(request):
         
     formulario = BuscarProductoFormulario()    
     return render(request, 'inicio/listar_productos.html', {'formulario': formulario, 'productos': listado_de_productos})
+
+
+class DetalleProducto(DetailView):
+    model = Producto
+    template_name = "inicio/detalle_producto.html"
+
+class ModificarProducto(UpdateView):
+    model = Producto
+    fields =  ['categoria', 'nombre', 'precio']
+    template_name = "inicio/modificar_producto.html"
+    success_url = reverse_lazy('inicio:listar_productos')
+    
+class EliminarProducto(DeleteView):
+    model = Producto
+    template_name = "inicio/eliminar_producto.html"
+    success_url = reverse_lazy('inicio:listar_productos')
+    

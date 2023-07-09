@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Eliminar Producto</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Eliminar Producto {{producto.nombre}}
+{% endblock h1_header %}
+
+{% block contenido %}
+
+
+<form action={% url 'inicio:eliminar_producto' producto.id %} method="post">
+    {% csrf_token %}
+    <p>Usted está a punto de eliminar el producto {{producto}}</p>
+    <button>Confirmar</button>
+</form>
+
+{% endblock contenido %}

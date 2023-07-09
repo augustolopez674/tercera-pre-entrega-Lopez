@@ -9,7 +9,7 @@ Listado de Productos
 {% endblock h1_header %}
 
 {% block contenido %}
-<button><a href={% url 'inicio:crear_producto' %}>Crear Producto</a></button>
+<button><a class="navbar-brand" href="{% url 'inicio:crear_producto' %}">Crear Producto</a></button>
 
 <br>
 <br>
@@ -18,10 +18,23 @@ Listado de Productos
     {{formulario}}
     <button>Buscar</button>
 </form>
+
 {% if productos %}
-{% for producto in productos %}
-<li>Nombre: {{producto.nombre}} - Precio: {{producto.precio}}</li>
+<ul>
+    {% for producto in productos %}
+    <li>
+    
+    {% comment %} <li>Nombre: {{producto.nombre}} - Precio: {{producto.precio}}</li> {% endcomment %}
+    <a href="{% url 'inicio:detalle_producto' producto.id %}">{{producto.nombre}}</a>
+    <button>
+        <a class="navbar-brand" href="{% url 'inicio:modificar_producto' producto.id  %}">Modificar</a>
+    </button>
+    <button>
+        <a class="navbar-brand" href="{% url 'inicio:eliminar_producto' producto.id %}">Eliminar</a>
+    </button>
+</li>
 {% endfor %}
+</ul>
 {% else %}
 <p>El producto solicitado no existe.</p>
 {% endif %}
