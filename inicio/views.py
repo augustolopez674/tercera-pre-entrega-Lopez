@@ -4,6 +4,8 @@ from inicio.models import Cliente, Producto
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 def inicio(request):
@@ -25,6 +27,8 @@ def crear_cliente(request):
     formulario = CrearClienteFormulario()
     return render(request, 'inicio/crear_cliente.html', {'formulario': formulario, 'mensaje': mensaje})
 
+
+@login_required
 def crear_producto(request):
     mensaje = ''
     
@@ -59,13 +63,13 @@ class DetalleProducto(DetailView):
     model = Producto
     template_name = "inicio/detalle_producto.html"
 
-class ModificarProducto(UpdateView):
+class ModificarProducto(LoginRequiredMixin, UpdateView):
     model = Producto
     fields =  ['categoria', 'nombre', 'precio']
     template_name = "inicio/modificar_producto.html"
     success_url = reverse_lazy('inicio:listar_productos')
     
-class EliminarProducto(DeleteView):
+class EliminarProducto(LoginRequiredMixin, DeleteView):
     model = Producto
     template_name = "inicio/eliminar_producto.html"
     success_url = reverse_lazy('inicio:listar_productos')
