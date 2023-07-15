@@ -36,7 +36,7 @@ def crear_producto(request):
         formulario = CrearProductoFormulario(request.POST)
         if formulario.is_valid():
             info = formulario.cleaned_data
-            producto = Producto(categoria=info['categoria'],nombre=info['nombre'],precio=info['precio'])
+            producto = Producto(categoria=info['categoria'],nombre=info['nombre'],precio=info['precio'],descripcion=info['descripcion'])
             producto.save()
             mensaje = f'Se creó el producto {producto.nombre}, de la categoria {producto.categoria} y precio {producto.precio}'
             return redirect('inicio:listar_productos')
@@ -62,10 +62,12 @@ def listar_productos(request):
 class DetalleProducto(DetailView):
     model = Producto
     template_name = "inicio/detalle_producto.html"
+    
+    
 
 class ModificarProducto(LoginRequiredMixin, UpdateView):
     model = Producto
-    fields =  ['categoria', 'nombre', 'precio']
+    fields =  ['categoria', 'nombre', 'precio', 'descripcion', 'imagen']
     template_name = "inicio/modificar_producto.html"
     success_url = reverse_lazy('inicio:listar_productos')
     
@@ -74,3 +76,7 @@ class EliminarProducto(LoginRequiredMixin, DeleteView):
     template_name = "inicio/eliminar_producto.html"
     success_url = reverse_lazy('inicio:listar_productos')
     
+
+
+def about_us(request):
+    return render(request, 'inicio/about_us.html')

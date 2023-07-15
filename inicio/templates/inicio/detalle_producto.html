@@ -11,4 +11,5 @@ Datos del Producto {{producto.nombre}}
 {% block contenido %}
 <li>Categoria: {{producto.categoria}}</li>
 <li>Precio: {{producto.precio}}</li>
+<li>Descripcion: {{producto.descripcion | safe}}</li>
 {% endblock contenido %}
