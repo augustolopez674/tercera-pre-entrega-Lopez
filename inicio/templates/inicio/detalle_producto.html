@@ -5,11 +5,17 @@
 {% endblock title_head %}
 
 {% block h1_header %}
-Datos del Producto {{producto.nombre}}
+Datos del Producto {{ producto.nombre }}
 {% endblock h1_header %}
 
 {% block contenido %}
-<li>Categoria: {{producto.categoria}}</li>
-<li>Precio: {{producto.precio}}</li>
-<li>Descripcion: {{producto.descripcion | safe}}</li>
+<li>Categoría: {{ producto.categoria }}</li>
+<li>Precio: {{ producto.precio }}</li>
+<li>Descripción: {{ producto.descripcion | safe }}</li>
+
+{% if producto.imagenes %}
+    <img src="{{ producto.imagenes.url }}" alt="Imagen del Producto">
+{% endif %}
+
+<p><a href="{% url 'inicio:listar_productos' %}">Volver a la lista de productos</a></p>
 {% endblock contenido %}
